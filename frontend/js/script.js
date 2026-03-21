@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Dark Mode Toggle Logic (Persistent)
     const darkModeToggle = document.getElementById('darkModeToggle');
     if (darkModeToggle) {
-        // Check for saved user preference on load
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
             darkModeToggle.checked = true;
@@ -116,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('theme', 'light');
             }
 
-            // Re-draw chart to update text/grid colors for the new theme
             if (chartInstance) {
                 const lastData = chartInstance.data.datasets[0].data;
                 const lastLabels = chartInstance.data.labels;
@@ -317,8 +315,6 @@ function renderInventoryTable(invData) {
     const fullAnalysisBody = document.getElementById('inventory-table-body');
 
     if (!invData) return;
-
-    // 2. Create the rows
     const rowsHtml = Object.entries(invData).map(([name, d]) => {
         const currentStock = d['Current Stock'] || 0;
         const reorderPoint = d['Reorder Point'] || 0;
@@ -351,7 +347,6 @@ function updateDemandChart(demandData, isRefresh = false, cached = null) {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    // FORCE CLEANUP: Ensure the old instance is completely dead
     if (chartInstance !== null) {
         chartInstance.destroy();
     }
@@ -378,15 +373,13 @@ function updateDemandChart(demandData, isRefresh = false, cached = null) {
             datasets: [{
                 label: 'Predicted Demand by Product',
                 data: values,
-                // CHIC UPDATE: Semi-transparent background with solid border
                 backgroundColor: `${themeColor}33`,
                 borderColor: themeColor,
                 borderWidth: 2,
-                borderRadius: 20, // Ultra-rounded "pill" shape
+                borderRadius: 20, 
                 borderSkipped: false,
                 maxBarThickness: 35,
 
-                // --- THE "NOTHING CHANGED" FIX: HOVER EFFECTS ---
                 hoverBackgroundColor: themeColor,
                 hoverBorderWidth: 0,
                 hoverBorderRadius: 20,
@@ -396,7 +389,7 @@ function updateDemandChart(demandData, isRefresh = false, cached = null) {
             responsive: true,
             maintainAspectRatio: false,
             layout: {
-                padding: { top: 20 } // Space for the chic floating feel
+                padding: { top: 20 } 
             },
             plugins: {
                 legend: { display: false },
@@ -412,7 +405,7 @@ function updateDemandChart(demandData, isRefresh = false, cached = null) {
                 y: {
                     beginAtZero: true,
                     border: { display: false },
-                    grid: { color: 'rgba(0,0,0,0.03)' }, // Minimalist grid
+                    grid: { color: 'rgba(0,0,0,0.03)' }, 
                     ticks: { color: textColor }
                 },
                 x: {
@@ -450,9 +443,9 @@ function updateDashboard(data) {
     document.getElementById("expiry-list").innerHTML = expiryHTML || '<div class="text-success">Stock is healthy.</div>';
 
     // ---------------- Inventory Table ----------------
-    let tableHTML = ""; // This must be initialized
+    let tableHTML = ""; 
     for (let item in inventory) {
-        const row = inventory[item]; // Define 'row' here
+        const row = inventory[item]; 
         tableHTML += `
             <tr>
                 <td>${item}</td>
@@ -483,8 +476,7 @@ async function askAI() {
         return;
     }
 
-    // 1. Prepare Context from the Dashboard
-    // This makes the AI "aware" of your specific data
+    
     const context = `
         Current Inventory Stats:
         - Total Predicted Revenue: ${document.getElementById('rev-value').innerText}
@@ -537,7 +529,6 @@ function togglePass() {
 function resetToUpload() {
     document.getElementById('nav-hub-stage').classList.add('d-none');
     document.getElementById('upload-stage').classList.remove('d-none');
-    // Optional: Clear the file input
     document.getElementById('csvFile').value = '';
 }
 
@@ -548,7 +539,7 @@ async function exportFullReport() {
 
     // 1. Header & Title
     doc.setFontSize(20);
-    doc.setTextColor(40, 167, 69); // StockSync Green
+    doc.setTextColor(40, 167, 69); 
     doc.text("StockSync Business Intelligence Report", 14, 22);
 
     doc.setFontSize(10);
@@ -588,7 +579,7 @@ async function exportFullReport() {
     // 4. Save the PDF
     doc.save(`StockSync_Report_${Date.now()}.pdf`);
 }
-let revenueChartInstance = null; // To track and destroy old charts
+let revenueChartInstance = null; 
 
 function renderRevenueChart(revenueData) {
     const canvas = document.getElementById('revenueChart');
