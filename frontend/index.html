@@ -1,0 +1,436 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockSync | Modern Inventory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+
+    <div id="landing-wrapper">
+        <nav class="navbar-gusto">
+            <div style="font-size: 1.5rem; font-weight: 900; color: var(--gusto-green);">StockSync</div>
+            <div class="nav-links">
+                <a href="javascript:void(0)" onclick="navToSection('ai-features-gusto')"
+                    class="me-4 text-decoration-none text-dark fw-bold">Features</a>
+                <a href="javascript:void(0)" onclick="navToSection('help-section')"
+                    class="me-4 text-decoration-none text-dark fw-bold">Help</a>
+                <button class="btn-gusto-primary" onclick="showSignup()">Get Started</button>
+            </div>
+        </nav>
+
+        <section class="hero-section">
+            <div class="container text-center">
+                <div class="hero-content">
+                    <h1>StockSync: Upload. Track. Manage.</h1>
+                    <p class="hero-subtext">Inventory management for growing teams.</p>
+                    <button class="btn-gusto-primary mt-4" onclick="showSignup()">Launch Dashboard</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="zigzag-section" style="overflow-x: hidden;">
+            <div class="container">
+                <div class="row align-items-center mb-5 pb-5 reveal">
+                    <div class="col-md-6">
+                        <img src="images/workflow.jpeg" class="zigzag-img" alt="Workflow">
+                    </div>
+                    <div class="col-md-5 offset-md-1">
+                        <h2 class="zigzag-title">Customize how your team's work flows</h2>
+                        <p class="zigzag-text">Set up, clean up, and automate even the most complicated project
+                            workflows.</p>
+                    </div>
+                </div>
+
+                <div class="row align-items-center mb-0 py-5 flex-md-row-reverse dark-zigzag reveal">
+                    <div class="col-md-6">
+                        <img src="images/stay_on_track.jpeg" class="zigzag-img" alt="Tracking">
+                    </div>
+                    <div class="col-md-5 offset-md-1">
+                        <h2 class="zigzag-title text-white">Stay on track — even when the track changes</h2>
+                        <p class="zigzag-text text-white-50">Use the Timeline view to map out the big picture and ensure
+                            your team stays on the same page.</p>
+                    </div>
+                </div>
+
+                <div class="row align-items-center mt-5 pt-5 reveal">
+                    <div class="col-md-6">
+                        <img src="images/byebye.jpeg" class="zigzag-img" alt="Centralization">
+                    </div>
+                    <div class="col-md-5 offset-md-1">
+                        <h2 class="zigzag-title">Bye-bye, confusion</h2>
+                        <p class="zigzag-text">Keep every detail centralized in real time so info flows freely across
+                            teams.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ai-features-gusto py-5" id="ai-features-gusto">
+            <div class="container">
+                <h2 class="text-center mb-5 zigzag-title">Discover AI features that power your teams</h2>
+                <div class="text-center mb-5">
+                    <button class="feature-tab-gusto active" data-tab="plan">Plan</button>
+                    <button class="feature-tab-gusto" data-tab="track">Track</button>
+                    <button class="feature-tab-gusto" data-tab="collaborate">Collaborate</button>
+                    <button class="feature-tab-gusto" data-tab="report">Report</button>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-lg-5">
+                        <div class="feature-text-container">
+                            <div id="plan" class="tab-content-gusto active">
+                                <h4 class="fw-bold" style="color: var(--gusto-green);">Kick off with clarity</h4>
+                                <ul class="feature-list-gusto">
+                                    <li><strong>Align work to goals:</strong> Connect work to company impact.</li>
+                                    <li><strong>Break down projects:</strong> Convert big ideas into smaller tasks.</li>
+                                    <li><strong>Get context:</strong> Find relevant resources quickly.</li>
+                                </ul>
+                            </div>
+                            <div id="track" class="tab-content-gusto">
+                                <h4 class="fw-bold" style="color: var(--gusto-green);">Stay up to date</h4>
+                                <ul class="feature-list-gusto">
+                                    <li><strong>Track work your way:</strong> View projects in boards, timelines or
+                                        calendar.</li>
+                                    <li><strong>Manage risks:</strong> Identify blockers and dependencies easily.</li>
+                                    <li><strong>Automate tasks:</strong> Remove repetitive manual work with AI.</li>
+                                </ul>
+                            </div>
+                            <div id="collaborate" class="tab-content-gusto">
+                                <h4 class="fw-bold" style="color: var(--gusto-green);">Bring teams together</h4>
+                                <ul class="feature-list-gusto">
+                                    <li><strong>Automate workflows:</strong> Create processes using simple instructions.
+                                    </li>
+                                    <li><strong>Streamline requests:</strong> Collect work through structured forms.
+                                    </li>
+                                    <li><strong>Stay aligned:</strong> Provide real-time updates across teams.</li>
+                                </ul>
+                            </div>
+                            <div id="report" class="tab-content-gusto">
+                                <h4 class="fw-bold" style="color: var(--gusto-green);">Inform your decisions</h4>
+                                <ul class="feature-list-gusto">
+                                    <li><strong>Track progress:</strong> See how work contributes to company goals.</li>
+                                    <li><strong>Performance insights:</strong> Understand productivity and progress.
+                                    </li>
+                                    <li><strong>AI insights:</strong> Identify trends and priorities automatically.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 text-center">
+                        <img id="featureImageDisplay" src="../images/plan_track2.jpeg"
+                            class="img-fluid feature-image-gusto" alt="Feature Illustration">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-section" id="help-section"
+            style="border-top: 1px solid #eee; background: #fff; padding: 60px 0;">
+            <div class="container text-center">
+                <h2 class="zigzag-title mb-5">Questions? Meet answers.</h2>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4 px-4" style="border-right: 1px solid #eee;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" width="50" class="mb-3"
+                            alt="Search">
+                        <h5 class="fw-bold mb-3">Help Center</h5>
+                        <p class="text-muted small">Find instant answers by browsing topics.</p>
+                        <a href="#"
+                            style="color: var(--gusto-green); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gusto-green);">Go
+                            to Help Center</a>
+                    </div>
+                    <div class="col-md-4 px-4" style="border-right: 1px solid #eee;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/597/597177.png" width="50" class="mb-3"
+                            alt="Phone">
+                        <h5 class="fw-bold mb-3">Give us a ring</h5>
+                        <p class="text-muted small">Monday through Friday, 9AM – 6PM IST.</p>
+                        <a href="tel:8009360383"
+                            style="color: var(--gusto-green); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gusto-green);">(800)
+                            936-0383</a>
+                    </div>
+                    <div class="col-md-4 px-4">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2002/2002517.png" width="50" class="mb-3"
+                            alt="Demo">
+                        <h5 class="fw-bold mb-3">Explore the demo</h5>
+                        <p class="text-muted small">See how easy using StockSync really is.</p>
+                        <a href="javascript:void(0)" onclick="switchToDashboard()"
+                            style="color: var(--gusto-green); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gusto-green);">See
+                            demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="expert-cta dark-version reveal">
+            <div class="container text-center">
+                <h2 class="zigzag-title text-white">Ready to see your inventory in a new light?</h2>
+                <h6 class="mb-4 text-white-50">We make it easy to convert your business to a stronger system.</h6>
+                <button class="btn-gusto-primary">Talk To An Expert</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="signup-view" style="display: none;">
+        <div class="signup-card">
+            <h2 class="glass-text">STOCKSYNC</h2>
+            <p>ENTER YOUR CREDENTIALS</p>
+            <form onsubmit="handleSignup(event)">
+                <input type="text" class="form-control mb-3" placeholder="Company Name" required>
+                <input type="email" class="form-control mb-3" placeholder="Work Email" required>
+                <input type="password" class="form-control mb-3" placeholder="Password" required>
+                <button type="submit" class="btn-gusto-primary w-100">Create Account</button>
+            </form>
+            <button class="btn btn-link mt-3" onclick="switchToHome()"
+                style="color: #444; text-decoration: none; font-size: 0.8rem;">← Return to Home</button>
+        </div>
+    </div>
+
+    <div id="dashboard-view" style="display: none;">
+        <div class="container py-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="fw-bold mb-0" style="color: var(--gusto-green);">📊 Business KPIs</h1>
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                        <label class="form-check-label text-muted" for="darkModeToggle">Dark Mode</label>
+                    </div>
+                    <button class="btn btn-sm btn-outline-danger" onclick="switchToHome()">Logout</button>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5 text-center">
+                <div class="col-md-4">
+                    <div class="stat-card kpi-card-top p-2 shadow-sm border-0">
+                        <p class="text-muted small mb-1">Predicted Monthly Revenue</p>
+                        <h5 id="rev-value" class="fw-bold mb-0">Rs.0</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card kpi-card-top p-2 shadow-sm border-0">
+                        <p class="text-muted small mb-1">Products Needing Reorder</p>
+                        <h2 id="reorder-count" class="fw-bold mb-0">0</h2>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card kpi-card-top p-2 shadow-sm border-0">
+                        <p class="text-muted small mb-1">Units at Expiry Risk</p>
+                        <h2 id="expiry-count" class="fw-black mb-0 text-danger">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4">
+                    <div class="stat-card p-4 shadow-sm border-0 h-100">
+                        <div id="upload-stage">
+                            <h6 class="fw-bold text-dark mb-3">Upload Dataset</h6>
+                            <div class="upload-box p-3 border border-dashed rounded text-center bg-light">
+                                <i class="bi bi-cloud-arrow-up fs-3 text-muted"></i>
+                                <input type="file" id="csvFile" class="form-control form-control-sm my-2">
+                                <button id="analyzeBtn" class="btn btn-dark btn-sm w-100 fw-bold">Analyze Data</button>
+                            </div>
+                        </div>
+
+                        <div id="nav-hub-stage" class="d-none">
+                            <h6 class="fw-bold mb-3">Dashboard Hub</h6>
+                            <div class="d-flex flex-column gap-2">
+                                <div class="kpi-nav-card active" onclick="switchView('sales', this)">
+                                    <span>📈</span> <span class="ms-2 small fw-bold">Product Demand</span>
+                                </div>
+                                <div class="kpi-nav-card" onclick="switchView('revenue', this)">
+                                    <span>💰</span> <span class="ms-2 small fw-bold">Revenue</span>
+                                </div>
+                                <div class="kpi-nav-card" onclick="switchView('expiry', this)">
+                                    <span>⚠️</span> <span class="ms-2 small fw-bold">Expiry Risk</span>
+                                </div>
+                                <div class="kpi-nav-card" onclick="switchView('inventory', this)">
+                                    <span>📦</span> <span class="ms-2 small fw-bold">Inventory</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-link btn-sm text-muted mt-4 w-100 text-decoration-none"
+                                onclick="resetToUpload()">← New File</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="stat-card p-3 shadow-sm border-0 h-100" id="main-content-area">
+                        <h6 class="fw-bold mb-3" id="main-title" style="color: var(--gusto-green);">Predicted demand by
+                            product</h6>
+
+                        <div id="sales-content" class="tab-content">
+                            <canvas id="demandChart"></canvas>
+                        </div>
+
+                        <div id="revenue-content" class="tab-content d-none">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+
+                        <div id="expiry-content" class="tab-content d-none">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover">
+                                    <thead class="table-light small">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Units</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expiry-table-body" class="small"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="inventory-content" class="tab-content d-none">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover">
+                                    <thead class="table-light small">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Current Stock</th>
+                                            <th>Reorder Level</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inventory-summary-body" class="small"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="stat-card p-4 shadow-sm border-0 bg-dark text-white rounded-3">
+                            <h5 class="fw-bold mb-4"><i class="bi bi-robot text-danger me-2"></i> AI Business Assistant
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <select id="provider" class="form-select custom-ai-input">
+                                        <option value="groq" selected>groq</option>
+                                        <option value="openai">openai</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" id="question" class="form-control custom-ai-input"
+                                        placeholder="Which product needs restocking?">
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input type="password" id="apiKey"
+                                            class="form-control custom-ai-input border-end-0"
+                                            placeholder="Enter API key">
+                                        <button class="btn btn-dark-input border-start-0" type="button"
+                                            onclick="togglePass()">
+                                            <i class="bi bi-eye text-secondary"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="base_url" class="form-control custom-ai-input"
+                                        value="https://api.groq.com/openai/v1">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="model_name" class="form-control custom-ai-input"
+                                        value="llama-3.3-70b-versatile">
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <button onclick="askAI()" id="aiBtn"
+                                        class="btn btn-outline-light px-4 py-2">Generate AI Insights</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="stat-card p-4 shadow-sm border-0">
+                            <h5 class="fw-bold mb-3">Inventory Analysis</h5>
+                            <div class="table-responsive">
+                                <table class="table align-middle">
+                                    <thead class="text-muted small text-uppercase">
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Current Stock</th>
+                                            <th>Reorder Point</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inventory-table-body">
+                                        <tr>
+                                            <td colspan="4" class="text-center py-4">Upload data to see results</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="button-box">
+            <button id="download-dashboard-btn" class="btn-export-luxe">
+                <i class="fas fa-camera me-2"></i> DOWNLOAD
+            </button>
+        </div>
+    </div>
+    <footer class="footer-section" style="background-color: #960707; padding: 30px 0 0 0;">
+        <div class="container">
+            <div class="row justify-content-center text-center text-white">
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold mb-3 small">Small Business</h5>
+                    <ul class="list-unstyled footer-links-gusto small">
+                        <li>Creative AI</li>
+                        <li>Photography</li>
+                        <li>Design</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold mb-3 small">Support</h5>
+                    <ul class="list-unstyled footer-links-gusto small">
+                        <li>Help Centre</li>
+                        <li>Contact</li>
+                        <li>Community</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold mb-3 small">Company</h5>
+                    <ul class="list-unstyled footer-links-gusto small">
+                        <li>About</li>
+                        <li>Careers</li>
+                        <li>Blog</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="social-bar-gusto">
+        <div class="container d-flex align-items-center justify-content-center flex-wrap">
+            <span class="follow-label">FOLLOW US</span>
+            <a href="#" class="social-item">
+                <div class="icon-box"><i class="bi bi-linkedin"></i></div><span>LinkedIn</span>
+            </a>
+            <a href="#" class="social-item">
+                <div class="icon-box"><i class="bi bi-instagram"></i></div><span>Instagram</span>
+            </a>
+            <a href="#" class="social-item">
+                <div class="icon-box"><i class="bi bi-twitter-x"></i></div><span>X</span>
+            </a>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

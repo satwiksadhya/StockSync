@@ -1,0 +1,1024 @@
+/* style.css */
+:root {
+    --gusto-green: #232122;
+    /* Changed from Green to Black/Dark Text */
+    --gusto-mint: #d4f0f0;
+    --gusto-guava: #ff5c5c;
+    --gusto-cream: #fefeff;
+    --text-dark: #232122;
+    --text-muted: #6a6865;
+
+    --dashboard-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --accent-glow: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+    --dashboard-bg: #0d1117;
+    /* Deep space black */
+    --card-bg: #161b22;
+    /* Sleek charcoal */
+    --text-dark: #f0f6fc;
+    /* Crisp off-white */
+    --text-muted: #8b949e;
+    /* Soft steel gray */
+    --border-color: #30363d;
+    /* Subtle metallic border */
+    --gusto-green: #ff3b3b;
+    /* Electric Crimson accent */
+    --accent-glow: rgba(255, 59, 59, 0.15);
+}
+
+body {
+    background-color: var(--gusto-cream);
+    color: var(--text-dark);
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .stat-card {
+    background-color: #1e1e1e !important;
+    color: white !important;
+    border: 1px solid #333 !important;
+}
+
+body.dark-mode .text-dark {
+    color: #ffffff !important;
+}
+
+/* NAVIGATION */
+.navbar-gusto {
+    background: transparent;
+    padding: 1.5rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar-gusto .nav-links a,
+.navbar-gusto div[style*="color: var(--gusto-green)"] {
+    color: white !important;
+}
+
+/* BUTTONS */
+.btn-gusto-primary {
+    background-color: var(--gusto-guava);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    border: none;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-gusto-primary:hover {
+    background-color: #960707;
+    transform: scale(1.05);
+    color: white;
+}
+
+.btn-export-luxe {
+    background: transparent;
+    border: 2px solid var(--gusto-guava);
+    color: var(--gusto-guava);
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: 0.3s all ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-export-luxe:hover {
+    background: var(--gusto-guava);
+    color: white !important;
+    box-shadow: 0 5px 15px var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+/* SECTIONS GENERAL */
+section {
+    padding: 80px 10%;
+}
+
+/* HERO SECTION */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+        url('../images/dashboard2.jpeg');
+    background-size: cover;
+    background-position: center;
+    padding-top: 120px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.hero-section h1 {
+    font-size: 3.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #ffffff !important;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+}
+
+.hero-subtext {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 60px;
+}
+
+.hero-section .btn-gusto-primary {
+    margin-top: 20px;
+    padding: 15px 40px;
+}
+
+/* ZIGZAG SECTION */
+.dark-zigzag {
+    background-color: #000;
+    position: relative;
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+    box-shadow: 0 0 0 100vmax #000;
+    clip-path: inset(0 -100vmax);
+}
+
+.dark-zigzag .zigzag-title {
+    color: white !important;
+}
+
+.dark-zigzag .zigzag-text {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.zigzag-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-dark) !important;
+    margin-bottom: 20px;
+}
+
+.zigzag-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.zigzag-img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* AI FEATURES SECTION */
+/* AI FEATURES SECTION */
+.ai-features-gusto {
+    position: relative;
+    padding: 100px 10%;
+    /* Warehouse background image stays as requested */
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)),
+        url('../images/plan_track2.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* 1. REMOVE WHITE BOX: Text now floats on the background */
+.feature-text-container {
+    background: transparent !important;
+    /* Removed white background */
+    padding: 0;
+    border-radius: 0;
+    backdrop-filter: none;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.ai-features-gusto .zigzag-title {
+    color: white !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Update text colors for readability on the warehouse background */
+.feature-text-container h4.fw-bold {
+    color: #ffffff !important;
+    font-size: 2rem;
+}
+
+.feature-text-container li,
+.feature-text-container li strong {
+    color: #f0f0f0 !important;
+    /* Light gray/white for contrast */
+}
+
+/* JIRA-STYLE TAB BUTTONS */
+.feature-tab-gusto {
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    /* Subtle transparent buttons */
+    padding: 10px 25px;
+    font-size: 18px;
+    color: white;
+    margin: 5px;
+    border-radius: 30px;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.feature-tab-gusto.active {
+    background-color: #ff5c5c !important;
+    color: white !important;
+    font-weight: 700;
+}
+
+/* --- Tab Hover Effect --- */
+.feature-tab-gusto {
+    background: transparent;
+    border: 2px solid transparent;
+    padding: 10px 25px;
+    border-radius: 50px;
+    /* Gives it that pill shape */
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    color: #444;
+    /* Or your preferred dark text color */
+}
+
+/* The Hover State */
+/* Specific hover color requested by user */
+.feature-tab-gusto:hover:not(.active) {
+    background-color: #960707 !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(150, 7, 7, 0.4);
+}
+
+.feature-tab-gusto:hover {
+    /* Translucent Coral Background */
+    background-color: rgba(255, 127, 112, 0.15);
+    color: #ff7f70;
+
+    /* The "Glow" shadow */
+    box-shadow: 0 0 20px rgba(255, 127, 112, 0.4);
+
+    /* Optional: subtle lift */
+    transform: translateY(-2px);
+}
+
+/* Ensure active state stands out from the hover state */
+.feature-tab-gusto.active {
+    background-color: var(--gusto-guava) !important;
+    /* Your original coral/red */
+    color: white !important;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 2. JIRA-STYLE IMAGE HIGHLIGHT */
+.ai-features-gusto .col-lg-7 {
+    position: relative;
+    padding: 30px;
+}
+
+/* The Blue Offset Background Box behind the image */
+.ai-features-gusto .col-lg-7::before {
+    content: "";
+    position: absolute;
+    top: 50px;
+    /* Offset from the top */
+    left: 70px;
+    /* Offset from the left */
+    right: 10px;
+    bottom: 10px;
+    background-color: #960707;
+    border-radius: 12px;
+    z-index: 0;
+}
+
+.feature-image-gusto {
+    position: relative;
+    z-index: 1;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.feature-image-gusto.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.tab-content-gusto {
+    display: none;
+}
+
+.tab-content-gusto.active {
+    display: block;
+    animation: fadeIn 0.6s ease;
+}
+
+.feature-list-gusto {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.feature-list-gusto li {
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 35px;
+}
+
+.feature-list-gusto li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #ff5c5c;
+    font-weight: bold;
+}
+
+/* EXPERT CTA */
+.expert-cta.dark-version {
+    background-color: #1a1a1a !important;
+    color: white !important;
+    padding: 80px 10%;
+    text-align: center;
+}
+
+.expert-cta.dark-version h2,
+.expert-cta.dark-version h3,
+.expert-cta.dark-version p {
+    color: white !important;
+}
+
+.expert-cta.dark-version .btn-gusto-primary {
+    box-shadow: 0 4px 15px rgba(255, 92, 92, 0.3);
+}
+
+/* RED BACKGROUND SECTION */
+.bg-red {
+    background-color: var(--gusto-guava) !important;
+    color: white !important;
+    padding: 40px 0;
+    width: 100%;
+}
+
+.bg-red h2,
+.bg-red h3,
+.bg-red p,
+.bg-red li {
+    color: white !important;
+}
+
+.bg-red .feature-list-gusto li::before {
+    color: var(--gusto-cream) !important;
+}
+
+.bg-red .btn-gusto-primary {
+    background-color: white !important;
+    color: var(--gusto-guava) !important;
+}
+
+.bg-red .btn-gusto-primary:hover {
+    background-color: var(--gusto-cream) !important;
+    transform: scale(1.05);
+}
+
+/* FOOTER & SOCIALS */
+.social-bar-gusto {
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.follow-label {
+    font-weight: 800;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    margin-right: 30px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.social-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    color: var(--text-dark);
+    margin: 0 15px;
+    transition: 0.3s ease;
+}
+
+.icon-box {
+    background: #464646;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.icon-box i {
+    color: #ffffff !important;
+    font-size: 1.2rem !important;
+}
+
+.gusto-footer {
+    background-color: #960707 !important;
+    padding: 60px 10%;
+    border-top: none;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.footer-column {
+    background: transparent !important;
+    padding: 0 !important;
+    color: white !important;
+}
+
+.gusto-footer h3,
+.gusto-footer li,
+.gusto-footer ul,
+.gusto-footer a {
+    color: white !important;
+    list-style: none;
+    text-decoration: none;
+}
+
+.gusto-footer li {
+    margin-bottom: 10px;
+    transition: 0.3s ease;
+}
+
+.gusto-footer li:hover {
+    color: rgba(255, 255, 255, 0.7) !important;
+    cursor: pointer;
+}
+
+/* SIGNUP VIEW */
+#signup-view {
+    background-color: #050505 !important;
+    height: 100vh !important;
+    width: 100vw !important;
+    display: none;
+    align-items: center !important;
+    justify-content: center !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 99999 !important;
+}
+
+#signup-view .signup-card,
+#signup-view .stat-card {
+    background: #111111 !important;
+    border: 1px solid #222222 !important;
+    padding: 50px !important;
+    border-radius: 24px !important;
+    width: 90% !important;
+    max-width: 450px !important;
+    margin: auto !important;
+    text-align: center !important;
+    box-shadow: 0 0 80px rgba(0, 0, 0, 1) !important;
+}
+
+#signup-view h2,
+#signup-view p,
+#signup-view label {
+    color: white !important;
+}
+
+#signup-view .form-control {
+    background: #000000 !important;
+    border: 1px solid #333333 !important;
+    color: #ffffff !important;
+    height: 50px !important;
+    margin-bottom: 20px;
+}
+
+#signup-view .form-control::placeholder {
+    color: #666 !important;
+}
+
+.glass-text {
+    font-weight: 800;
+    font-size: 2.5rem;
+    background: linear-gradient(120deg, #fff 0%, rgba(255, 255, 255, 0.5) 50%, #fff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glassShimmer 4s linear infinite;
+    margin-bottom: 20px;
+}
+
+.btn-back-luxe {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    padding: 8px 20px;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.btn-back-luxe:hover {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+/* DASHBOARD SPECIFIC */
+#dashboard-view {
+    display: none;
+    min-height: 100vh;
+    background-color: var(--dashboard-bg) !important;
+    /* Changed from var(--gusto-cream) */
+    padding-top: 40px;
+    padding-bottom: 100px;
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.stat-card {
+    background: #fff;
+    border-radius: 15px;
+    min-height: 550px;
+}
+
+.fw-black {
+    font-weight: 900;
+    font-size: 2.5rem;
+}
+
+[data-theme='dark'] .stat-card {
+    background: #1a1d21;
+    border-color: #2d3238;
+    color: #fff;
+}
+
+[data-theme="dark"] .stat-card {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Stat Value Neon Effect */
+.stat-value {
+    color: var(--gusto-green) !important;
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    text-shadow: 0 0 15px var(--accent-glow);
+}
+
+.feature-tab {
+    padding: 10px 5px;
+    border: none;
+    background: none;
+    font-weight: 700;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+}
+
+.feature-tab.active {
+    color: var(--gusto-green);
+    border-bottom: 3px solid var(--gusto-green);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glassShimmer {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* This ensures the lists are perfectly aligned with the headings above them */
+.footer-links-gusto {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    list-style: none;
+    text-align: center;
+    /* Centers the list items relative to the heading */
+}
+
+.footer-links-gusto li {
+    color: white !important;
+    /* Explicitly keeping text white */
+}
+
+.footer-section h5 {
+    margin-bottom: 20px !important;
+    /* More space between the Title and the Links */
+    color: white !important;
+    /* Explicitly keeping title white */
+}
+
+/* DARK MODE TEXT CORRECTIONS */
+[data-theme="dark"] .table {
+    --bs-table-bg: transparent !important;
+    background-color: transparent !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-dark) !important;
+}
+
+
+[data-theme="dark"] .table td {
+    background-color: transparent !important;
+    color: var(--text-muted) !important;
+    /* Muted for secondary data */
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+[data-theme="dark"] .stat-value {
+    color: var(--gusto-green) !important;
+    /* Uses the neon green */
+    text-shadow: 0 0 10px rgba(79, 223, 175, 0.3);
+}
+
+[data-theme="dark"] .table td:first-child {
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    color: #ffffff !important;
+}
+
+/* AI Bubble Button */
+.btn-ai-bubble {
+    border-radius: 30px !important;
+    background: linear-gradient(to right, #960707, #d32f2f);
+    border: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-ai-bubble:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(150, 7, 7, 0.3);
+}
+
+.ai-assistant-container {
+    background: #ffffff;
+    border-radius: 20px;
+    border-left: 6px solid #960707;
+    /* Matches your brand color */
+}
+
+/* Rounded Inputs */
+.bubble-input {
+    border-radius: 20px !important;
+    padding-left: 20px;
+    border: 1px solid #ddd;
+}
+
+/* AI Response Styling */
+.badge {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.ai-response-box {
+    background: #fff5f5;
+    /* Very light tint of your red */
+    border: 1px solid #ffcccc;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+[data-theme="dark"] .form-control {
+    background-color: #0d1117 !important;
+    border: 1px solid var(--border-color) !important;
+    color: white !important;
+}
+
+[data-theme="dark"] .form-control:focus {
+    box-shadow: 0 0 10px var(--accent-glow);
+    border-color: var(--gusto-green) !important;
+}
+
+/* TABLE POLISH */
+.table thead th {
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+[data-theme="dark"] .table {
+    --bs-table-bg: transparent !important;
+    background-color: transparent !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .table thead th {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    color: var(--gusto-green) !important;
+    border-bottom: 2px solid var(--border-color) !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+}
+
+[data-theme="dark"] .table td {
+    color: var(--text-muted) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+[data-theme="dark"] .table td:first-child {
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+/* Hover effect for techie feel */
+[data-theme="dark"] .table-hover tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    color: #ffffff !important;
+}
+
+/* LOGOUT BUTTON */
+.btn-outline-danger {
+    border-radius: 30px;
+    padding: 8px 25px;
+    font-weight: 600;
+}
+
+.ai-insight-box {
+    background: #16251c;
+    /* Very dark green */
+    border-left: 4px solid #28a745;
+    padding: 1rem;
+    border-radius: 8px;
+    color: #d1d1d1;
+}
+
+.chart-container {
+    margin-top: 20px;
+    overflow: hidden;
+    /* Prevents scrollbars inside the card */
+}
+
+.kpi-nav-card {
+    background: #ffffff;
+    border: 1px solid #eef2f7;
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.kpi-nav-card:hover {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+    transform: translateX(5px);
+}
+
+.kpi-nav-card.active {
+    background: #ffffff;
+    border-color: #28a745;
+    border-left: 6px solid #28a745;
+    /* Gusto Green accent */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.kpi-nav-card p {
+    margin: 0;
+    font-weight: 700;
+    color: #1a202c;
+    font-size: 0.95rem;
+}
+
+.kpi-nav-card small {
+    font-size: 0.75rem;
+    color: #718096;
+}
+
+.kpi-nav-card .icon {
+    font-size: 1.4rem;
+    padding: 5px;
+}
+
+#demandChart {
+    width: 100% !important;
+    height: 300px !important;
+    image-rendering: auto;
+    /* Standard for high-res screens */
+}
+
+/* Ensure the container doesn't squash the canvas */
+.tab-content {
+    min-height: 320px;
+}
+
+/* Custom styling for the dark input theme */
+.custom-ai-input {
+    background-color: #3e444a !important;
+    /* The grey color from your photo */
+    border: 1px solid #495057 !important;
+    color: #ffffff !important;
+    padding: 12px 15px !important;
+    border-radius: 6px !important;
+    min-height: 48px !important;
+    /* height: auto !important; */
+    line-height: 1.5 !important;
+    overflow: visible !important;
+    font-size: 1rem !important;
+}
+
+.custom-ai-input::placeholder {
+    color: #adb5bd !important;
+}
+
+/* Eye icon button styling */
+.btn-dark-input {
+    background-color: #3e444a;
+    border: 1px solid #495057;
+}
+
+/* Dashboard spacing adjustment */
+#dashboard-view {
+    padding: 30px !important;
+    /* Adds the padding seen in photo 2 */
+}
+
+/* --- 1. Top KPI Row (Compact & Small) --- */
+#dashboard-view .container>.row:nth-of-type(1) .stat-card {
+    min-height: 120px !important;
+    /* Forces them to shrink */
+    padding: 1rem !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+#dashboard-view .container>.row:nth-of-type(1) h5 {
+    font-size: 1.8rem !important;
+    /* Slightly smaller numbers */
+    margin: 5px 0 0 0;
+}
+
+#dashboard-view .container>.row:nth-of-type(1) p {
+    font-size: 0.75rem !important;
+    margin-bottom: 0;
+}
+
+/* --- 2. Middle Section (Hub & Charts) --- */
+/* Target the second row to ensure it takes up the bulk of the screen */
+#dashboard-view .container>.row:nth-of-type(2) .stat-card {
+    min-height: 100px !important;
+    /* Gives the graph area plenty of height */
+}
+
+/* Adjust the Dashboard Hub cards to stay slim */
+.kpi-nav-card {
+    padding: 12px 15px !important;
+    margin-bottom: 10px;
+    min-height: auto !important;
+}
+
+/* --- 3. AI Business Assistant (Compact Footer) --- */
+#dashboard-view .ai-assistant-container,
+#dashboard-view .row:last-of-type .stat-card {
+    min-height: auto !important;
+    /* Prevents the black box from stretching */
+    padding: 1.5rem !important;
+}
+
+.custom-ai-input {
+    height: 40px !important;
+    /* Slimmer input fields */
+}
+
+.btn-ai-bubble {
+    padding: 8px 20px !important;
+}
+
+/* Specifically target the 3 small KPI cards at the top */
+.kpi-card-top {
+    min-height: 120px !important;
+    /* Force them to be small */
+    /* height: 140px !important; */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Adjust font sizing to fit the smaller boxes */
+.kpi-card-top h5,
+.kpi-card-top h2 {
+    font-size: 2.2rem !important;
+    margin: 0 !important;
+}
+
+.kpi-card-top p {
+    font-size: 0.8rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px !important;
+}
+
+.mb-4 {
+    row-gap: 2rem;
+}
+
+.button-box {
+    display: flex;
+    padding-right: 55px;
+    justify-content: flex-end;
+    margin: 20px 0;
+}
+
+input {
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #000000fb;
+    color: white;
+}
