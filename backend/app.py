@@ -1,151 +1,136 @@
-from flask import Flask, request, jsonify
-import pandas as pd
 import os
+import pandas as pd
 
-from utils.csv_validator import validate_and_clean_csv
+from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
+
 from services.demand_forecast import forecast_demand
 from services.inventory_service import calculate_inventory
 from services.revenue_service import calculate_revenue
 from services.expiry_service import detect_expiry
-
 from rag.llm_client import call_llm
 
-app = Flask(__name__)
 
-UPLOAD_FOLDER = "uploads"
+# ---------- PATH FIX ----------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_PATH = os.path.abspath(os.path.join(BASE_DIR, "..", "frontend"))
 
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+app = Flask(__name__, static_folder=FRONTEND_PATH, static_url_path="")
+CORS(app)
 
-# Global variable to store analytics data
 analytics_data = None
 
 
+# ---------- HOME ----------
 @app.route("/")
 def home():
-    return "Business Analytics SaaS Backend Running"
+    return send_from_directory(FRONTEND_PATH, "index.html")
 
 
-# ---------- CSV UPLOAD ----------
+# ---------- UPLOAD ----------
 @app.route("/upload", methods=["POST"])
-def upload_file():
-
+def upload():
     global analytics_data
 
-    if "file" not in request.files:
-        return jsonify({"error": "No file uploaded"}), 400
+    try:
+        file = request.files.get("file")
+        if not file:
+            return jsonify({"error": "No file uploaded"}), 400
 
-    file = request.files["file"]
+        df = pd.read_csv(file)
 
-    file_path = os.path.join(UPLOAD_FOLDER, file.filename)
-    file.save(file_path)
+        # ✅ Normalize column names (VERY IMPORTANT)
+        df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 
-    # ---------- VALIDATE CSV ----------
-    df, message = validate_and_clean_csv(file_path)
+        print("DEBUG Columns after cleaning:", df.columns.tolist())
 
-    if df is None:
-        return jsonify({"error": message}), 400
+        # ---------- CORE PIPELINE ----------
+        demand = forecast_demand(df)
 
-    # ---------- ANALYTICS ----------
-    forecast_results = forecast_demand(df)
-    inventory_results = calculate_inventory(df, forecast_results)
-    revenue_results = calculate_revenue(df, forecast_results)
-    expiry_results = detect_expiry(df, forecast_results)
+        # ✅ FIX: pass forecast results
+        inventory = calculate_inventory(df, demand)
 
-    response = {
-        "Demand Forecast": forecast_results,
-        "Inventory Analysis": inventory_results,
-        "Revenue Forecast": revenue_results,
-        "Expiry Risk": expiry_results
-    }
+        revenue = calculate_revenue(df,demand)
+        expiry = detect_expiry(df,demand)
 
-    # Store globally for AI usage
-    analytics_data = response
+        # ---------- SAFE CALCULATIONS ----------
+        total_revenue = 0
+        for v in revenue.values():
+            if isinstance(v, dict):
+                total_revenue += v.get("Predicted Revenue", 0)
+            elif isinstance(v, (int, float)):
+                total_revenue += v
 
-    return jsonify(response)
+        reorder_count = sum(
+            1 for v in inventory.values()
+            if isinstance(v, dict) and v.get("Status") in ["REORDER", "Restock Needed"]
+        )
+
+        expiry_count = sum(
+            1 for v in expiry.values()
+            if isinstance(v, dict) and v.get("Status") in ["Expiry Risk", "High Risk"]
+        )
+
+        # ---------- STORE ----------
+        analytics_data = {
+            "demand_data": demand,
+            "revenue_data": revenue,
+            "inventory_data": inventory,
+            "expiry_data": expiry,
+            "total_revenue": total_revenue,
+            "reorder_count": reorder_count,
+            "expiry_count": expiry_count
+        }
+
+        return jsonify(analytics_data)
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
 
 
-# ---------- AI INSIGHTS ----------
-@app.route("/ai-insights", methods=["POST"])
-def ai_insights():
-
+# ---------- AI ----------
+@app.route("/ask_ai", methods=["POST"])
+def ask_ai():
     global analytics_data
 
-    if analytics_data is None:
-        return jsonify({"answer": "Please upload dataset first."})
+    if not analytics_data:
+        return jsonify({"error": "Upload CSV first"}), 400
 
     data = request.json
 
-    question = data.get("question")
-    api_key = data.get("api_key")
-    base_url = data.get("base_url")
-    model_name = data.get("model_name")
-    provider = data.get("provider")
-
-    # ---------- CONVERT JSON → READABLE CONTEXT ----------
-    context = ""
-
-    # Demand Forecast
-    for product, d in analytics_data["Demand Forecast"].items():
-        context += f"""
-Product: {product}
-Predicted Daily Demand: {d['Predicted Daily Demand']}
-"""
-
-    # Inventory
-    for product, d in analytics_data["Inventory Analysis"].items():
-        context += f"""
-Product: {product}
-Current Stock: {d['Current Stock']}
-Inventory Status: {d['Status']}
-"""
-
-    # Revenue
-    for product, d in analytics_data["Revenue Forecast"].items():
-        context += f"""
-Product: {product}
-Predicted Revenue: {d['Predicted Revenue']}
-"""
-
-    # Expiry
-    for product, d in analytics_data["Expiry Risk"].items():
-        context += f"""
-Product: {product}
-Potential Expiry Units: {d['Potential Expiry Units']}
-Expiry Status: {d['Status']}
-"""
-
-    # ---------- PROMPT ----------
     prompt = f"""
-You are a business analytics assistant.
+Business Summary:
+Total Revenue: {analytics_data['total_revenue']}
+Reorders Needed: {analytics_data['reorder_count']}
+Expiry Risks: {analytics_data['expiry_count']}
 
-Use ONLY the business data below to answer.
-
-Business Data:
-{context}
-
-Question:
-{question}
-
-Instructions:
-- Answer clearly using the data
-- Mention product name if relevant
-- Do NOT say "information not available" unless truly missing
+User Question:
+{data.get('question')}
 """
 
-    # ---------- CALL LLM ----------
-    answer = call_llm(
-        provider,
-        api_key,
-        base_url,
-        model_name,
-        prompt
-    )
+    try:
+        answer = call_llm(
+            data.get("provider"),
+            data.get("api_key"),
+            data.get("model_name"),
+            prompt
+        )
 
-    return jsonify({"answer": answer})
+        return jsonify({"answer": answer})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# ---------- DEBUG ROUTE ----------
+@app.route("/test")
+def test():
+    return "Flask is working!"
 
 
 # ---------- RUN ----------
 if __name__ == "__main__":
-    print("Backend running on http://127.0.0.1:5000")
-    app.run(debug=True)
+    print("Frontend path:", FRONTEND_PATH)
+    app.run(debug=True, port=5000)
