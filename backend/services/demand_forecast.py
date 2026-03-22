@@ -76,22 +76,6 @@ def forecast_demand(df):
 
             latest_features = X.tail(1)
             prediction = model.predict(latest_features)[0]
-<<<<<<< HEAD
-=======
-
-            results[product] = {
-                "MAE": round(mean_absolute_error(y_test, model.predict(X_test)), 2),
-                "Predicted Daily Demand": int(round(prediction))
-            }
-
-        except Exception as e:
-            print(f"⚠️ Fallback used for {product}: {e}")
-
-            results[product] = {
-                "MAE": 0,
-                "Predicted Daily Demand": int(round(product_df["quantity_sold"].mean() or 0))
-            }
->>>>>>> f4f5c2c (report generation added)
 
             results[product] = {
                 "MAE": round(mean_absolute_error(y_test, model.predict(X_test)), 2),
