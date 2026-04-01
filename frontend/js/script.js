@@ -617,9 +617,10 @@ async function askAI() {
     }
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/ask_ai', {
+        const BASE_URL = window.location.origin;
+        const response = await fetch(`${BASE_URL}/ask_ai`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 question: question,
                 context: context,
@@ -676,8 +677,9 @@ async function downloadReport() {
     }
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/download_report", {
-        
+        const BASE_URL = window.location.origin;
+
+        const response = await fetch(`${BASE_URL}/download_report`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -685,8 +687,8 @@ async function downloadReport() {
             body: JSON.stringify({
                 ...globalStoredData,
                 ai_insights: aiGeneratedText
-            })
-        });
+        })
+    });
 
         // ❗ CHECK RESPONSE FIRST (IMPORTANT)
         if (!response.ok) {
