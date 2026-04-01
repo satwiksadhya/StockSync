@@ -219,7 +219,8 @@ async function runMLAnalysis(e) {
     formData.append("file", fileInput.files[0]);
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/upload", {
+        const BASE_URL = window.location.origin;
+        const response = await fetch(`${BASE_URL}/upload`, {
             method: "POST",
             body: formData
         });
